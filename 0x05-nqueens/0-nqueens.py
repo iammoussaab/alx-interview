@@ -1,15 +1,26 @@
 #!/usr/bin/python3
-# N Queens
+"""N Queens solution finder module.
+"""
 import sys
 
+
 solutions = []
-
+"""The list of possible solutions to the N queens problem.
+"""
 n = 0
-
+"""The size of the chessboard.
+"""
 board = None
+"""The list representing the chessboard for queen placement.
+"""
+
 
 def get_input():
-    # Retrieves and validates this program's argument.
+    """Retrieves and validates this program's argument.
+
+    Returns:
+        int: The size of the chessboard.
+    """
     global n
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
@@ -26,8 +37,16 @@ def get_input():
 
 
 def is_position_safe(board, row, col):
-    # Checks if a queen can be safely placed at the given position.
+    """Checks if a queen can be safely placed at the given position.
 
+    Args:
+        board (list): The board with queen placements.
+        row (int): The row index.
+        col (int): The column index.
+
+    Returns:
+        bool: True if the position is safe, otherwise False.
+    """
     for i in range(row):
         # Check column and both diagonals
         if board[i] == col or abs(board[i] - col) == abs(i - row):
@@ -36,6 +55,11 @@ def is_position_safe(board, row, col):
 
 
 def solve_nqueens(row):
+    """Recursively attempts to solve the N Queens problem.
+
+    Args:
+        row (int): The current row to attempt placing a queen.
+    """
     global solutions, board, n
     if row == n:
         # If all queens are placed, add the solution
@@ -50,7 +74,7 @@ def solve_nqueens(row):
 
 
 def get_solutions():
-    # # Sets up the board and starts the solution search
+    """Sets up the board and starts the solution search."""
     global board, n
     board = [-1] * n
     solve_nqueens(0)
